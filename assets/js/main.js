@@ -4,75 +4,6 @@
   const root = document.documentElement;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const save = (k, v) => { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } };
-
-  /* ---------- shade + AM/PM ---------- */
-
-  const SHADES = { roma: 'Romã', figo: 'Figo', pessego: 'Pêssego', matcha: 'Matcha' };
-  const picks = $$('[data-shade-pick]');
-  const shadeName = $('[data-shade-name]');
-  const themeBtn = $('[data-theme-toggle]');
-  const themeMeta = $('meta[name="theme-color"]');
-
-  function setShade(shade, keep) {
-    if (!SHADES[shade]) return;
-    root.dataset.shade = shade;
-    picks.forEach(b => {
-      const on = b.dataset.shadePick === shade;
-      b.setAttribute('aria-checked', on);
-      b.tabIndex = on ? 0 : -1;
-    });
-    if (shadeName) shadeName.textContent = SHADES[shade];
-    if (keep) save('cl-shade', shade);
-  }
-
-  function setTheme(theme, keep) {
-    root.dataset.theme = theme;
-    themeBtn.setAttribute('aria-pressed', theme === 'pm');
-    themeMeta.content = theme === 'pm' ? '#161213' : '#F5EFE7';
-    if (keep) save('cl-theme', theme);
-  }
-
-  picks.forEach(b => b.addEventListener('click', () => setShade(b.dataset.shadePick, true)));
-  $$('[role="radiogroup"]').forEach(group => {
-    group.addEventListener('keydown', e => {
-      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-      if (!step) return;
-      e.preventDefault();
-      const items = $$('[data-shade-pick]', group);
-      const next = items[(items.indexOf(document.activeElement) + step + items.length) % items.length];
-      setShade(next.dataset.shadePick, true);
-      next.focus();
-    });
-  });
-  themeBtn.addEventListener('click', () => setTheme(root.dataset.theme === 'pm' ? 'am' : 'pm', true));
-  setShade(root.dataset.shade || 'roma');
-  setTheme(root.dataset.theme || 'am');
-
-  /* ---------- tabs (intro language, caption, routine shelf) ---------- */
-
-  $$('[data-tabs]').forEach(box => {
-    const tabs = $$('[role="tab"]', box);
-    const select = (tab, focus) => {
-      tabs.forEach(t => {
-        const on = t === tab;
-        t.setAttribute('aria-selected', on);
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).classList.toggle('is-on', on);
-      });
-      if (focus) tab.focus();
-    };
-    tabs.forEach((tab, i) => {
-      tab.addEventListener('click', () => select(tab));
-      tab.addEventListener('keydown', e => {
-        const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
-        if (to === undefined) return;
-        e.preventDefault();
-        select(tabs[(to + tabs.length) % tabs.length], true);
-      });
-    });
-  });
 
   /* ---------- header ---------- */
 
@@ -84,7 +15,7 @@
 
   const setMenu = open => {
     top.classList.toggle('is-open', open);
-    document.documentElement.classList.toggle('menu-open', open);
+    root.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', open);
     menuBtn.textContent = open ? 'Close' : 'Menu';
   };
@@ -93,7 +24,7 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
   if ('IntersectionObserver' in window) {
-    const links = new Map($$('.nav a').map(a => [a.getAttribute('href').slice(1), a]));
+    const links = new Map($$('.nav a[href^="#"]').map(a => [a.getAttribute('href').slice(1), a]));
     const spy = new IntersectionObserver(entries => {
       entries.forEach(en => {
         if (!en.isIntersecting) return;
@@ -116,34 +47,7 @@
     $$('[data-reveal]').forEach(el => el.classList.add('is-in'));
   }
 
-  /* ---------- label tilt ---------- */
-
-  const label = $('[data-tilt]');
-  if (label && !calm && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const card = $('.label-in', label);
-    label.addEventListener('pointermove', e => {
-      const r = label.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      label.classList.add('is-live');
-      card.style.setProperty('--ry', `${(x - .5) * 9}deg`);
-      card.style.setProperty('--rx', `${(.5 - y) * 7}deg`);
-      card.style.setProperty('--mx', `${x * 100}%`);
-      card.style.setProperty('--my', `${y * 100}%`);
-    });
-    label.addEventListener('pointerleave', () => {
-      label.classList.remove('is-live');
-      card.style.setProperty('--ry', '0deg');
-      card.style.setProperty('--rx', '0deg');
-    });
-  }
-
-  /* ---------- clocks + copy ---------- */
-
-  const clocks = $$('[data-clock]').map(el => [el, new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: el.dataset.clock })]);
-  const tick = () => { const now = new Date(); clocks.forEach(([el, f]) => { el.textContent = f.format(now); }); };
-  tick();
-  setInterval(tick, 15000);
+  /* ---------- copy email ---------- */
 
   $$('[data-copy]').forEach(btn => {
     const label = btn.textContent;
