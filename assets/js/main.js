@@ -65,80 +65,77 @@
 
   /* ---------- work viewer ---------- */
 
-  const VIDEO = 'Angle, script and caption, with suggested shots, b-roll and imagery. Edited by Deloitte’s video team.';
-  const COPY = 'Strategy and Portuguese copy, adapted from the global report for a local audience.';
-  const ADAPT = 'Local rollout and Portuguese caption. Subtitle and translation review with the video team.';
   const li = (urn, slug) => ({ p: 'li', urn, url: `https://www.linkedin.com/posts/${slug}` });
   const ig = (t, code) => ({ p: 'ig', t, code });
 
   const PIECES = {
     'dct-genai': {
-      title: 'Digital Consumer Trends 2025', kind: 'Reel', date: 'November 2025', role: VIDEO,
+      title: 'Digital Consumer Trends 2025', kind: 'Reel', date: 'November 2025',
       hook: '85% dos portugueses com conhecimento de ferramentas de GenAI já utilizou pelo menos uma.',
       gloss: '85% of people in Portugal who know of GenAI tools have already used at least one.',
       src: [ig('reel', 'DRAvyotjSPV'), li('urn:li:ugcPost:7395067984551227392', 'deloitte_digital-consumer-trends-2025-portugal-edition-ugcPost-7395067984551227392-0WRT')],
     },
     'dct-social': {
-      title: 'Digital Consumer Trends 2025', kind: 'Reel', date: 'November 2025', role: VIDEO,
+      title: 'Digital Consumer Trends 2025', kind: 'Reel', date: 'November 2025',
       hook: '36% dos portugueses já acompanham notícias ou eventos atuais através das redes sociais.',
       gloss: '36% of people in Portugal already follow the news or current events through social media.',
       src: [ig('reel', 'DRH8UILgTnE'), li('urn:li:ugcPost:7396155148584210433', 'deloitte_digital-consumer-trends-2025-portugal-edition-activity-7396155149897080832-IcUu')],
     },
     sports: {
-      title: '2026 Global Sports Outlook', kind: 'Reel', date: 'April 2026', role: VIDEO,
+      title: '2026 Global Sports Outlook', kind: 'Reel', date: 'April 2026',
       hook: 'Como pode o crescimento das organizações desportivas elevar a experiência dos adeptos?',
       gloss: 'How can the growth of sports organisations lift the fan experience?',
       src: [ig('reel', 'DW89I77Em0S'), li('urn:li:ugcPost:7448686288095924224', 'deloitte_sports-outlook-diogo-henriques-ugcPost-7448686288095924224-gEHy')],
     },
     tmt26: {
-      title: 'TMT Predictions 2026', kind: 'Carousel, 7 pages', date: 'February 2026', role: COPY,
+      title: 'TMT Predictions 2026', kind: 'Carousel, 7 pages', date: 'February 2026',
       hook: 'As nossas 13 previsões para este ano em tópicos como GenAI, infraestruturas inteligentes, conectividade de satélite, e a colisão do streaming com conteúdos de redes sociais.',
       gloss: 'Our 13 predictions for the year: GenAI, smart infrastructure, satellite connectivity, and streaming colliding with social content.',
       src: [li('urn:li:ugcPost:7427758478431125504', 'deloitte_tmt-predictions-2026-ugcPost-7427758478431125504-79hs')],
     },
     tmt25: {
-      title: 'TMT Predictions 2025', kind: 'Video teaser and launch post', date: 'December 2024 to March 2025', role: ADAPT,
+      title: 'TMT Predictions 2025', kind: 'Video teaser and launch post', date: 'December 2024 to March 2025',
       hook: 'Como podem as organizações de Technology, Media & Telecommunications preparar-se para o futuro?',
       gloss: 'How can Technology, Media & Telecommunications organisations prepare for the future?',
       src: [li('urn:li:ugcPost:7309665242567888897', 'deloitte_tmt2025-short4mp4-ugcPost-7309665242567888897-GGTu'), ig('p', 'DDQZentsGMJ')],
     },
     tmt24: {
-      title: 'TMT Predictions 2024', kind: 'Post', date: 'May 2024', role: COPY,
+      title: 'TMT Predictions 2024', kind: 'Post', date: 'May 2024',
       hook: 'A tecnologia e a conetividade podem ajudar a solucionar grandes problemas.',
       gloss: 'Technology and connectivity can help solve big problems.',
       src: [ig('p', 'C7Ib6FVt4gw')],
     },
     'cs-52': {
-      title: 'ConsumerSignals', kind: 'Post', date: 'May 2025', role: COPY,
+      title: 'ConsumerSignals', kind: 'Post', date: 'May 2025',
       hook: 'No final de 2024, 52% dos portugueses entre os 18 e 34 anos esperavam atingir uma melhor condição financeira em 2025.',
       gloss: 'At the end of 2024, 52% of 18-to-34-year-olds in Portugal expected to be better off in 2025.',
       src: [li('urn:li:activity:7332465479837528064', 'deloitte_deloitteportugal-consumersignals-consumo-activity-7332465479837528064-oih6')],
     },
     'cr-2026': {
-      title: 'Consumer & Retail 2026', kind: 'Post', date: 'April 2026', role: COPY,
+      title: 'Consumer & Retail 2026', kind: 'Post', date: 'April 2026',
       hook: 'O que temos em vista para 2026 nos setores do consumo e retalho?',
       gloss: 'What do we have in sight for consumer and retail in 2026?',
       src: [li('urn:li:activity:7452023278094934016', 'deloitte_deloitteportugal-consumo-retalho-activity-7452023278094934016-JDJt')],
     },
     'cs-ig': {
-      title: 'ConsumerSignals', kind: 'Carousel', date: 'June 2024', role: COPY,
+      title: 'ConsumerSignals', kind: 'Carousel', date: 'June 2024',
       hook: 'Os hábitos e preferências de consumo dos portugueses estão em constante evolução.',
       gloss: 'How people in Portugal shop, and what they prefer, keeps changing.',
       src: [ig('p', 'C74PXc_NvpG')],
     },
     banking: {
-      title: 'Banking Insights Summit 2024', kind: 'Event film', date: 'May 2024', role: VIDEO,
+      title: 'Banking Insights Summit 2024', kind: 'Event film', date: 'May 2024',
       hook: '', gloss: 'Recap film from the first edition of the summit, “Exploring new pathways”.',
       src: [li('urn:li:ugcPost:7192115678047277056', 'deloitte_banking-insights-summit-2024-exploring-ugcPost-7192115678047277056-o8fc')],
     },
     health: {
-      title: 'Global Healthcare Sector Outlook 2024', kind: 'Expert video', date: 'May 2024', role: VIDEO,
+      title: 'Global Healthcare Sector Outlook 2024', kind: 'Expert video', date: 'May 2024',
       hook: 'Em Portugal, como no resto do mundo, a adoção de Inteligência Artificial tem o potencial de revolucionar o setor da saúde.',
       gloss: 'In Portugal, as everywhere else, adopting AI has the potential to transform healthcare.',
       src: [li('urn:li:ugcPost:7195497964327378944', 'deloitte_global-healthcare-sector-outlook-2024-ugcPost-7195497964327378944-pG8t')],
     },
     cre: {
-      title: '2026 Commercial Real Estate Outlook', kind: 'Carousel, 6 pages', date: 'November 2025', role: COPY,
+      title: '2026 Commercial Real Estate Outlook', kind: 'Carousel, 6 pages', date: 'November 2025',
       hook: 'Será que estamos a assistir a uma pausa momentânea na recuperação do mercado imobiliário comercial a nível global?',
       gloss: 'Are we seeing a momentary pause in the global commercial property recovery?',
       src: [li('urn:li:ugcPost:7391519700486365185', 'deloitte_2026-commercial-real-estate-outlook-ugcPost-7391519700486365185-Fo6N')],
@@ -181,7 +178,6 @@
       $('#viewer-title').textContent = piece.title;
       $('#viewer-hook').textContent = piece.hook;
       $('#viewer-gloss').textContent = piece.gloss;
-      $('#viewer-role').textContent = piece.role;
       $('#viewer-date').textContent = piece.date;
       $('#viewer-count').textContent = `${String(at + 1).padStart(2, '0')} / ${order.length}`;
       tabs.hidden = piece.src.length < 2;
